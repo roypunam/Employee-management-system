@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			emp.setPassword(passwordEncoder.encode(empDto.getPassword()));
 
 			// Database called
-			RoleEntity role = roleRepo.findById(Integer.valueOf(RoleEnum.USER.getValue())).get();
+			RoleEntity role = roleRepo.findById(Integer.valueOf(RoleEnum.ADMIN.getValue())).get();
 			emp.getRoleList().add(role);
 
 			// saved to database

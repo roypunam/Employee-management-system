@@ -1,6 +1,7 @@
 package com.employee.management.emp_manager.service;
 
-import com.employee.management.emp_manager.entity.RoleEntity;
+import com.employee.management.emp_manager.dto.RoleDto;
+import com.employee.management.emp_manager.exception.RoleExistException;
 
 /**
  * <b>Role Service</b>
@@ -10,6 +11,9 @@ import com.employee.management.emp_manager.entity.RoleEntity;
  */
 public interface RoleService {
 
-	RoleEntity createRole(RoleEntity role);
+	RoleDto createRole(RoleDto roleDto) throws RoleExistException;
+
+
+//	RoleDto changeRole(RoleDto roleDto, String id);
 
 }

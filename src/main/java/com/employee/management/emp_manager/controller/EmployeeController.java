@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,6 +58,7 @@ public class EmployeeController {
 	}
 
 	@PutMapping("/edit/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<EmployeeDtoResponse> updateEmployeeDetails(@RequestBody EmployeeDtoRequest empDto, @PathVariable String id) {
 		log.info("updateEmployeeDetails API called.");
 		EmployeeDtoResponse updatedEmpDetails = employeeService.updateEmployeeDetails(empDto, id);
@@ -63,6 +66,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/list/view")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<List<EmployeeDtoResponse>> getAllEmployee() {
 		log.info("getAllEmployee API called.");
 		List<EmployeeDtoResponse> getList = employeeService.getAllEmployee();
@@ -71,6 +75,7 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/id/{id}")
+	@Secured({ "ADMIN", "USER" })
 	public ResponseEntity<EmployeeDtoResponse> getEmployee(@PathVariable String id) {
 		log.info("getEmployee API called.");
 		EmployeeDtoResponse getEmp = employeeService.getEmployee(id);
@@ -78,6 +83,7 @@ public class EmployeeController {
 	}
 
 	@DeleteMapping("/delete/id/{id}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public ResponseEntity<DeleteResponse> deleteEmployee(@PathVariable String id) {
 		log.info("deleteEmployee API called.");
 		DeleteResponse deleteResponse = employeeService.deleteEmployee(id);
