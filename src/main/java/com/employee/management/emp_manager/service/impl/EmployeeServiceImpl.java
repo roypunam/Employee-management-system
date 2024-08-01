@@ -1,7 +1,6 @@
 package com.employee.management.emp_manager.service.impl;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +63,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			emp.setPassword(passwordEncoder.encode(empDto.getPassword()));
 
 			// Database called
-			RoleEntity role = roleRepo.findById(Integer.valueOf(RoleEnum.ADMIN.getValue())).get();
+			RoleEntity role = roleRepo.findById(Integer.valueOf(RoleEnum.USER.getValue())).get();
 			emp.getRoleList().add(role);
 
 			// saved to database
@@ -77,8 +76,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public String login(LoginRequest loginRequest) {
-		
-		//Authenticate credentials
+
+		// Authenticate credentials
 		try {
 			authenticationManager.authenticate(
 					new UsernamePasswordAuthenticationToken(loginRequest.getEmpId(), loginRequest.getPassword()));
@@ -151,6 +150,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 		// Database called to delete employee
 		employeeRepo.delete(emp);
 		return new DeleteResponse("Record of the employee deleted successfully", true);
+	}
+
+	@Override
+	public EmployeeDtoResponse changeRole(String employeeId) {
+		EmployeeEntity employee = employeeRepo.findById(employeeId)
+				.orElseThrow(() -> new EmployeeNotFoundException("Employee", "empId", employeeId));
+		RoleEntity role = roleRepo.findById(Integer.valueOf(RoleEnum.ADMIN.getValue())).get();
+		employee.getRoleList().remove(0);
+		employee.getRoleList().add(role);
+		EmployeeEntity Updatedemp=employeeRepo.save(employee);
+		return EmployeeEntity.getEmployeeDtoResponse(Updatedemp);
 	}
 
 }

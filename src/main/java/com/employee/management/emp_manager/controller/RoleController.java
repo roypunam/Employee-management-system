@@ -37,14 +37,7 @@ public class RoleController {
 		return new ResponseEntity<RoleDto>(createdRole, HttpStatus.OK);
 	}
 	
-//	@PostMapping("/change/role")
-//	@PreAuthorize("hasAuthority('ADMIN')")
-//	public ResponseEntity<RoleDto> changeRole(@RequestBody RoleDto roleDto, String id){
-//		log.info("changeRole API called.");
-//		RoleDto updatedRole=roleService.changeRole(roleDto,id);
-//		return new ResponseEntity<RoleDto>(updatedRole,HttpStatus.OK);
-//		
-//	}
+	
 	
 
 	

@@ -66,7 +66,8 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/list/view")
-	@PreAuthorize("hasAuthority('ADMIN')")
+//	@PreAuthorize("hasAuthority('ADMIN')")
+	@Secured({ "ADMIN", "USER" })
 	public ResponseEntity<List<EmployeeDtoResponse>> getAllEmployee() {
 		log.info("getAllEmployee API called.");
 		List<EmployeeDtoResponse> getList = employeeService.getAllEmployee();
@@ -88,5 +89,14 @@ public class EmployeeController {
 		log.info("deleteEmployee API called.");
 		DeleteResponse deleteResponse = employeeService.deleteEmployee(id);
 		return new ResponseEntity<DeleteResponse>(deleteResponse, HttpStatus.OK);
+	}
+	
+	@PutMapping("/change/role/{employeeId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public ResponseEntity<EmployeeDtoResponse> changeRole(@PathVariable String employeeId){
+		log.info("changeRole API called.");
+		EmployeeDtoResponse updatedRole=employeeService.changeRole(employeeId);
+		return new ResponseEntity<EmployeeDtoResponse>(updatedRole,HttpStatus.OK);
+		
 	}
 }

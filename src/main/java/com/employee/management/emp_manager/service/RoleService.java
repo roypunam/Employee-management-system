@@ -14,6 +14,6 @@ public interface RoleService {
 	RoleDto createRole(RoleDto roleDto) throws RoleExistException;
 
 
-//	RoleDto changeRole(RoleDto roleDto, String id);
+	
 
 }

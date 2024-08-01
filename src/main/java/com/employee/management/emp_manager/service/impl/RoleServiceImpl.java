@@ -24,9 +24,6 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
 	private RoleRepo roleRepo;
 
-//	@Autowired
-//	private EmployeeRepo employeeRepo;
-
 	@Override
 	public RoleDto createRole(RoleDto roleDto) throws RoleExistException {
 		log.info("createRole service impl called.");
@@ -40,13 +37,5 @@ public class RoleServiceImpl implements RoleService {
 			throw new RoleExistException("Role already exist with this role id: " + existRole.getRoleId());
 		}
 	}
-
-//	@Override
-//	public RoleDto changeRole(RoleDto roleDto,String id) {
-//		EmployeeEntity employee = employeeRepo.findById(id).orElseThrow(()-> new EmployeeNotFoundException("Employee", "empId", id));
-//		RoleEntity role = roleRepo.findById(Integer.valueOf(RoleEnum.ADMIN.getValue())).get();
-//		employee.setRoleList();
-//		return null;
-//	}
 
 }

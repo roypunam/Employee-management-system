@@ -27,4 +27,6 @@ public interface EmployeeService {
 	public DeleteResponse deleteEmployee(String id);
 
 	public String login(LoginRequest loginRequest);
+	
+	public EmployeeDtoResponse changeRole(String id);
 }
