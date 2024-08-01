@@ -52,7 +52,7 @@ POST /employee/login - Login
 POST /employee/register - Register employee
 PUT /employee/edit/{id} - Update an existing employee
 DELETE /employee/delete/id/{id} - Delete an employee
-PUT/employee/change/role/{employeeId} - change role 
+PUT /employee/change/role/{employeeId} - change role 
 ```
 - [REF Employee controller](https://github.com/roypunam/Employee-management-system/blob/main/src/main/java/com/employee/management/emp_manager/controller/EmployeeController.java)
 
